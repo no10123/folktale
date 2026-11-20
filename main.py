@@ -6,8 +6,11 @@ RED    = "\x1b[38;2;243;139;168m"   # hearts
 CLEAR  = "\033[0m"
 BG     = "\033[48;2;30;30;46m"
 TEXT   = "\033[38;2;205;214;244m"
-print(BG + TEXT)
-os.system('cls' if os.name == 'nt' else 'clear')
+def clear():
+    print("\033[H\033[2J", end="", flush=True)
+    print(TEXT)
+
+clear()
 print("""
 welcome to a python version of Scoundrel.
 
@@ -28,9 +31,7 @@ hearts - will heal you for the number on it (max hp is 20).
 # game loop, hand -> play cards or flee. 
 
 i = input("Press enter to Play: ")
-print(BG + "\033[H")
-os.system('cls' if os.name == 'nt' else 'clear')
-print(BG + TEXT)
+clear()
 
 # functions
 def build_deck():
@@ -52,12 +53,11 @@ while True:
 
     while True:
         hand = [deck.pop(0) for _ in range(min(3, len(deck)))] + hand
-        print(BG + "\033[H")
-        os.system('cls' if os.name == 'nt' else 'clear')
+        clear()
         print(f"Total cards: {len(deck)}")
         print(f"hp: {hp}")
         print("-- cards --")
-        print("\n".join(list(f"{x}.{c['color']} {c['number']} of {c['suit']}{BG + TEXT}" for x, c in enumerate(hand))))
+        print("\n".join(list(f"{x}.{c['color']} {c['number']} of {c['suit']}{TEXT}" for x, c in enumerate(hand))))
         print(f"-- weapon: {weapon}, last killed: {last_killed} --")
         i = " "
         if has_flee:
@@ -88,12 +88,11 @@ while True:
             IL = []
             actions = []
             for i in range(min(3,len(hand))):
-                print(BG + "\033[H")
-                os.system('cls' if os.name == 'nt' else 'clear')
+                clear()
                 print(f"Total cards: {len(deck)}")
                 print(f"hp: {hp}")
                 print("-- cards --")
-                print("\n".join(list(f"{'*' if x in X else x}.{c['color']} {c['number']} of {c['suit']}{BG + TEXT}" for x, c in enumerate(hand))))
+                print("\n".join(list(f"{'*' if x in X else x}.{c['color']} {c['number']} of {c['suit']}{TEXT}" for x, c in enumerate(hand))))
                 print(f"-- weapon: {weapon}, last killed: {last_killed} --")
                 print(f"\033[s" + f"would you like to play or flee [p/f]: {I}" if I is not None else "you flee'd last floor, so you must play these cards.")
                 if X != []:
