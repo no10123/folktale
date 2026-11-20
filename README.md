@@ -30,10 +30,15 @@ hearts - will heal you for the number on it (max HP is 20).
 ## Features:
 
 deck generation - a simple function that builds a whole random deck
+
 flee - the ability to flee and not consecutively.
+
 color-coded cards - blue for enemies (clubs + spades), red for HP (hearts), and yellow for weapons (diamonds). (uses catpuccin colors in ansi)
+
 card selection - allowing selection of cards
+
 win / loss detection - game detects once you have won or lost
+
 
 ## Credits:
 me - dev
