@@ -102,7 +102,7 @@ while True:
                         print(actions[v])
                 while True:
                     left = [str(n) for n in range(len(hand)) if n not in X]
-                    i = input(f"number for the card ({', '.join(left)}): ")
+                    i = input(TEXT + f"number for the card ({', '.join(left)}): ")
                     valid_input = False
                     for x, c in enumerate(hand):
                         if (i == str(x) or i == f"{c['number']} of {c['suit']}") and x not in X:
@@ -119,18 +119,18 @@ while True:
                         damage = c["number"]
                     last_killed = c["number"]
                     hp -= max(0,damage)
-                    actions.append(f"You took {damage} damage")
+                    actions.append(TEXT + f"You took {damage} damage")
                     if hp <= 0:
                         break
                 elif c["suit"] == 'hearts':
                     old_hp = hp
                     hp = min(20, hp + c["number"])
                     healed = hp - old_hp
-                    actions.append(f"You healed {healed} hp")
+                    actions.append(TEXT + f"You healed {healed} hp")
                 elif c["suit"] == 'diamonds':
                     weapon = c["number"]
                     last_killed = None
-                    actions.append(f"You gained a weapon with {c['number']} strength.")
+                    actions.append(TEXT + f"You gained a weapon with {c['number']} strength.")
             for i in range(len(hand)):
                 if i not in X:
                     hand = [hand[i]]
@@ -139,12 +139,12 @@ while True:
                 hand = []
         if hp <= 0 or (len(deck) == 0 and len(hand) == 0):
             break
-        print(actions[-1])
-        input("Press enter to go to next round: ")
+        print(TEXT + actions[-1])
+        input(TEXT + "Press enter to go to next round: ")
     if hp <= 0:
-        print("you lost")
+        print(TEXT + "you lost")
     else:
-        print("you won")
-    if "no".startswith(input("do you want to play again?\n[y/n] > ").lower()):
+        print(TEXT + "you won")
+    if "no".startswith(input(TEXT + "do you want to play again?\n[y/n] > ").lower()):
         break
 
