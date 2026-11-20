@@ -28,7 +28,7 @@ hearts - will heal you for the number on it (max hp is 20).
 # game loop, hand -> play cards or flee. 
 
 i = input("Press enter to Play: ")
-print(BG)
+print(BG + "\033[H")
 os.system('cls' if os.name == 'nt' else 'clear')
 print(BG + TEXT)
 
@@ -52,7 +52,7 @@ while True:
 
     while True:
         hand = [deck.pop(0) for _ in range(min(3, len(deck)))] + hand
-        print(BG)
+        print(BG + "\033[H")
         os.system('cls' if os.name == 'nt' else 'clear')
         print(f"Total cards: {len(deck)}")
         print(f"hp: {hp}")
@@ -88,7 +88,7 @@ while True:
             IL = []
             actions = []
             for i in range(min(3,len(hand))):
-                print(BG)
+                print(BG + "\033[H")
                 os.system('cls' if os.name == 'nt' else 'clear')
                 print(f"Total cards: {len(deck)}")
                 print(f"hp: {hp}")
