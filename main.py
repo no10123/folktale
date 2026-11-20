@@ -4,11 +4,9 @@ BLUE   = "\033[38;2;137;180;250m"   # clubs + spades
 YELLOW = "\x1b[38;2;249;226;175m"   # diamonds
 RED    = "\x1b[38;2;243;139;168m"   # hearts
 CLEAR  = "\033[0m"
-BG     = "\033[48;2;30;30;46m"
-TEXT   = "\033[38;2;205;214;244m"
 def clear():
     print("\033[H\033[2J", end="", flush=True)
-    print(TEXT)
+    print('\033[0m')
 
 clear()
 print("""
@@ -57,7 +55,7 @@ while True:
         print(f"Total cards: {len(deck)}")
         print(f"hp: {hp}")
         print("-- cards --")
-        print("\n".join(list(f"{x}.{c['color']} {c['number']} of {c['suit']}{TEXT}" for x, c in enumerate(hand))))
+        print("\n".join(list(f"{x}.{c['color']} {c['number']} of {c['suit']}{'\033[0m'}" for x, c in enumerate(hand))))
         print(f"-- weapon: {weapon}, last killed: {last_killed} --")
         i = " "
         if has_flee:
@@ -92,7 +90,7 @@ while True:
                 print(f"Total cards: {len(deck)}")
                 print(f"hp: {hp}")
                 print("-- cards --")
-                print("\n".join(list(f"{'*' if x in X else x}.{c['color']} {c['number']} of {c['suit']}{TEXT}" for x, c in enumerate(hand))))
+                print("\n".join(list(f"{'*' if x in X else x}.{c['color']} {c['number']} of {c['suit']}{'\033[0m'}" for x, c in enumerate(hand))))
                 print(f"-- weapon: {weapon}, last killed: {last_killed} --")
                 print(f"\033[s" + f"would you like to play or flee [p/f]: {I}" if I is not None else "you flee'd last floor, so you must play these cards.")
                 if X != []:
@@ -102,7 +100,7 @@ while True:
                         print(actions[v])
                 while True:
                     left = [str(n) for n in range(len(hand)) if n not in X]
-                    i = input(TEXT + f"number for the card ({', '.join(left)}): ")
+                    i = input('\033[0m' + f"number for the card ({', '.join(left)}): ")
                     valid_input = False
                     for x, c in enumerate(hand):
                         if (i == str(x) or i == f"{c['number']} of {c['suit']}") and x not in X:
@@ -119,18 +117,18 @@ while True:
                         damage = c["number"]
                     last_killed = c["number"]
                     hp -= max(0,damage)
-                    actions.append(TEXT + f"You took {damage} damage")
+                    actions.append('\033[0m' + f"You took {damage} damage")
                     if hp <= 0:
                         break
                 elif c["suit"] == 'hearts':
                     old_hp = hp
                     hp = min(20, hp + c["number"])
                     healed = hp - old_hp
-                    actions.append(TEXT + f"You healed {healed} hp")
+                    actions.append('\033[0m' + f"You healed {healed} hp")
                 elif c["suit"] == 'diamonds':
                     weapon = c["number"]
                     last_killed = None
-                    actions.append(TEXT + f"You gained a weapon with {c['number']} strength.")
+                    actions.append('\033[0m' + f"You gained a weapon with {c['number']} strength.")
             for i in range(len(hand)):
                 if i not in X:
                     hand = [hand[i]]
@@ -139,12 +137,12 @@ while True:
                 hand = []
         if hp <= 0 or (len(deck) == 0 and len(hand) == 0):
             break
-        print(TEXT + actions[-1])
-        input(TEXT + "Press enter to go to next round: ")
+        print('\033[0m' + actions[-1])
+        input('\033[0m' + "Press enter to go to next round: ")
     if hp <= 0:
-        print(TEXT + "you lost")
+        print('\033[0m' + "you lost")
     else:
-        print(TEXT + "you won")
-    if "no".startswith(input(TEXT + "do you want to play again?\n[y/n] > ").lower()):
+        print('\033[0m' + "you won")
+    if "no".startswith(input('\033[0m' + "do you want to play again?\n[y/n] > ").lower()):
         break
 
