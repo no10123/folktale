@@ -7,7 +7,7 @@ CLEAR  = "\033[0m"
 BG     = "\033[48;2;30;30;46m"
 TEXT   = "\033[38;2;205;214;244m"
 print(BG + TEXT)
-os.system("clear")
+os.system('cls' if os.name == 'nt' else 'clear')
 print("""
 welcome to a python version of Scoundrel.
 
@@ -29,7 +29,7 @@ hearts - will heal you for the number on it (max hp is 20).
 
 i = input("Press enter to Play: ")
 print(BG)
-os.system("clear")
+os.system('cls' if os.name == 'nt' else 'clear')
 print(BG + TEXT)
 
 # functions
@@ -53,7 +53,7 @@ while True:
     while True:
         hand = [deck.pop(0) for _ in range(min(3, len(deck)))] + hand
         print(BG)
-        os.system("clear")
+        os.system('cls' if os.name == 'nt' else 'clear')
         print(f"Total cards: {len(deck)}")
         print(f"hp: {hp}")
         print("-- cards --")
@@ -89,7 +89,7 @@ while True:
             actions = []
             for i in range(min(3,len(hand))):
                 print(BG)
-                os.system('clear')
+                os.system('cls' if os.name == 'nt' else 'clear')
                 print(f"Total cards: {len(deck)}")
                 print(f"hp: {hp}")
                 print("-- cards --")
